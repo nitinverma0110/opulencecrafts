@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Opulence Crafts | Link in Bio</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Amsterdam Two Font + Luxury Typography -->
+  <style>
+    @font-face {
+      font-family: 'Amsterdam Two';
+      src: url('./fonts/AmsterdamTwo-Regular.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    .brand-font {
+      font-family: 'Amsterdam Two', cursive;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #8B5CF6, #EC4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* 3D carousel effect */
+    #gallery {
+      perspective: 1200px;
+    }
+    .carousel-item {
+      transform-style: preserve-3d;
+      transition: transform 0.7s ease, box-shadow 0.5s ease;
+    }
+    .carousel-item:hover {
+      transform: scale(1.1) translateZ(20px);
+      box-shadow: 0 30px 50px rgba(0,0,0,0.3);
+      z-index: 10;
+    }
+
+    /* Sparkles canvas overlay */
+    #sparkles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-[#FAF9F6] via-[#F3E8FF] to-[#FDFDFD] min-h-screen w-full flex justify-center items-start p-4 relative">
+
+  <!-- Sparkles Canvas -->
+  <canvas id="sparkles"></canvas>
+
+  <!-- Full Page Container -->
+  <div class="relative z-10 w-full max-w-[1080px] bg-white/70 backdrop-blur-md rounded-3xl shadow-[0_25px_50px_rgba(0,0,0,0.25)] flex flex-col items-center px-6 sm:px-12 py-8 overflow-hidden">
+
+    <!-- Profile & Brand -->
+    <div class="flex flex-col items-center mt-6">
+      <img src="./OpulenceCrafts.png" alt="Opulence Crafts profile" 
+           class="w-32 h-32 sm:w-44 sm:h-44 rounded-full border-4 border-white shadow-2xl object-cover hover:scale-105 transition-transform duration-500" />
+
+      <!-- Title Image -->
+      <img src="./Title.png" alt="Opulence Crafts Title" 
+           class="mt-6 w-3/4 max-w-md sm:max-w-lg object-contain brand-font" />
+
+      <!-- Tagline -->
+      <p class="text-gray-600 text-base sm:text-lg mt-2 font-medium tracking-wide text-center">✨ Luxury Handmade Candles & Crafts ✨</p>
+    </div>
+
+    <!-- Social Links -->
+    <div class="mt-8 flex flex-col sm:flex-row sm:flex-wrap sm:justify-center gap-4 w-full max-w-md">
+      <a href="https://instagram.com/opulencecrafts" target="_blank" rel="noopener"
+         class="flex-1 flex items-center justify-center gap-2 sm:gap-3 bg-gradient-to-r from-purple-700 via-pink-500 to-purple-600 hover:scale-105 hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] text-white py-3 sm:py-4 px-4 sm:px-6 rounded-full text-sm sm:text-lg font-semibold transition-all duration-300">
+        <i data-lucide="instagram" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+        Instagram
+      </a>
+      <a href="https://facebook.com/opulencecrafts" target="_blank" rel="noopener"
+         class="flex-1 flex items-center justify-center gap-2 sm:gap-3 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 hover:scale-105 hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] text-white py-3 sm:py-4 px-4 sm:px-6 rounded-full text-sm sm:text-lg font-semibold transition-all duration-300">
+        <i data-lucide="facebook" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+        Facebook
+      </a>
+      <a href="https://www.facebook.com/marketplace/profile/61579440759822" target="_blank" rel="noopener"
+         class="flex-1 flex items-center justify-center gap-2 sm:gap-3 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-700 hover:scale-105 hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] text-white py-3 sm:py-4 px-4 sm:px-6 rounded-full text-sm sm:text-lg font-semibold transition-all duration-300">
+        <i data-lucide="store" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+        Marketplace
+      </a>
+      <a href="https://wa.me/YOURNUMBER" target="_blank" rel="noopener"
+         class="flex-1 flex items-center justify-center gap-2 sm:gap-3 bg-gradient-to-r from-green-500 via-green-400 to-green-600 hover:scale-105 hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] text-white py-3 sm:py-4 px-4 sm:px-6 rounded-full text-sm sm:text-lg font-semibold transition-all duration-300">
+        <i data-lucide="message-circle" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+        WhatsApp
+      </a>
+    </div>
+
+    <!-- Gallery -->
+    <div class="w-full mt-10">
+      <h2 class="text-xl sm:text-2xl font-semibold text-gray-700 mb-6 text-center tracking-wide">Our Creations</h2>
+      <div class="relative w-full overflow-hidden">
+        <div id="gallery" class="flex gap-4 sm:gap-6 transition-transform duration-700 ease-in-out">
+          <!-- Gallery Images -->
+          <div class="carousel-item w-[160px] sm:w-[220px] h-[160px] sm:h-[220px] flex-shrink-0 rounded-xl overflow-hidden shadow-2xl">
+            <img src="https://minotcandle.com/cdn/shop/files/minot-daybreak-lit-books.webp" class="w-full h-full object-cover" />
+          </div>
+          <div class="carousel-item w-[160px] sm:w-[220px] h-[160px] sm:h-[220px] flex-shrink-0 rounded-xl overflow-hidden shadow-2xl">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/51hQYpaIROL._SL500_._AC_SL500_.jpg" class="w-full h-full object-cover" />
+          </div>
+          <div class="carousel-item w-[160px] sm:w-[220px] h-[160px] sm:h-[220px] flex-shrink-0 rounded-xl overflow-hidden shadow-2xl">
+            <img src="https://s.alicdn.com/@sc04/kf/H5f58ac3e1a2a4c30a1028832c4164fb54/Romantic-Rose-Carved-Shaped-Aromatherapy-Scented-Candle-Gift-Set-Luxury-Private-Label-Custom-Art-Scented-Candle.jpg" class="w-full h-full object-cover" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 3D Infinite Carousel + Ambient Sparkles Script -->
+  <script>
+    // 3D Carousel
+    const gallery = document.getElementById("gallery");
+    const items = Array.from(gallery.children);
+    items.forEach(item => gallery.appendChild(item.cloneNode(true)));
+    let offset = 0;
+    const itemWidth = 160 + 16;
+    const smItemWidth = 220 + 24;
+    function getItemWidth() { return window.innerWidth < 640 ? itemWidth : smItemWidth; }
+    function scrollGallery3D() {
+      offset += 1;
+      gallery.style.transform = `translateX(${-offset}px)`;
+      gallery.style.transition = 'transform 0.05s linear';
+      if(offset >= items.length * getItemWidth()) offset = 0;
+    }
+    setInterval(scrollGallery3D, 20);
+    window.addEventListener('resize', () => { offset = 0; });
+    lucide.createIcons();
+
+    // Sparkles Canvas
+    const canvas = document.getElementById("sparkles");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+
+    const particles = [];
+    const colors = ["#FFD700", "#FFFFFF"]; // gold and white
+
+    function createParticleRandom() {
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height;
+      particles.push({
+        x, y,
+        radius: Math.random()*2 + 1.5,
+        alpha: 0,
+        maxAlpha: Math.random()*0.6 + 0.4,
+        decay: Math.random()*0.02 + 0.003,
+        grow: true,
+        glowRadius: Math.random()*4 + 2,
+        color: colors[Math.floor(Math.random()*colors.length)],
+        driftX: (Math.random()-0.5)*0.2,
+        driftY: -0.1 - Math.random()*0.2
+      });
+    }
+
+    // Create continuous random sparkles
+    setInterval(() => { for(let i=0;i<2;i++) createParticleRandom(); }, 100);
+
+    function animateParticles() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(let i=particles.length-1;i>=0;i--) {
+        const p = particles[i];
+        if(p.grow){ p.alpha += p.decay; if(p.alpha >= p.maxAlpha) p.grow=false; } 
+        else { p.alpha -= p.decay; if(p.alpha <= 0) particles.splice(i,1); }
+
+        const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.glowRadius);
+        gradient.addColorStop(0, `rgba(${parseInt(p.color.slice(1,3),16)},${parseInt(p.color.slice(3,5),16)},${parseInt(p.color.slice(5,7),16)},${p.alpha})`);
+        gradient.addColorStop(0.8, `rgba(${parseInt(p.color.slice(1,3),16)},${parseInt(p.color.slice(3,5),16)},${parseInt(p.color.slice(5,7),16)},0)`);
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.glowRadius, 0, Math.PI*2);
+        ctx.fill();
+
+        p.x += p.driftX;
+        p.y += p.driftY;
+      }
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+  </script>
+
+</body>
+</html>
