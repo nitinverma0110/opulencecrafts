@@ -25,6 +25,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
+    @font-face {
+        font-family: 'MyCustomFont';
+        src: url('fonts/amsterdam-two-ttf.ttf') format('truetype');
+    }
+
+    h1 {
+        font-family: 'MyCustomFont', sans-serif;
+    }
     body {
       font-family: 'Playfair Display', serif;
     }
@@ -43,8 +51,9 @@
       <img src="./OpulenceCrafts.png" alt="Opulence Crafts profile" 
            class="w-32 h-32 sm:w-44 sm:h-44 rounded-full border-4 border-white shadow-2xl object-cover hover:scale-105 transition-transform duration-500" />
 
-      <img src="./Title.png" alt="Opulence Crafts Title" 
-           class="mt-6 w-3/4 max-w-md sm:max-w-lg object-contain" />
+      <h1 class="text-neutral-800 text-lg sm:text-xl font-medium tracking-wide mt-2 text-justify">
+        Opulence Crafts      
+      </h1>
 
       <p class="text-neutral-800 text-lg sm:text-xl font-medium tracking-wide mt-2 text-justify">
         Indulge your senses in a world of luxury, elegance, and serenity. At Opulence Crafts, each candle is meticulously handcrafted with premium wax, rich fragrances, and artistic designs, bringing a touch of timeless opulence to your home or special occasions. ✨
@@ -160,6 +169,7 @@
 
 </body>
 </html>
+
 
 
 
