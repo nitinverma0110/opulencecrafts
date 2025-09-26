@@ -178,28 +178,49 @@
   </div>
 
   <!-- Carousel -->
+  <!-- Carousel -->
   <script>
     // 3D Carousel Movement
     const gallery = document.getElementById("gallery");
     const items = Array.from(gallery.children);
     items.forEach(item => gallery.appendChild(item.cloneNode(true))); // duplicate for infinite scroll
+
     let offset = 0;
     const itemWidth = 160 + 16;
     const smItemWidth = 220 + 24;
-    function getItemWidth() { return window.innerWidth < 640 ? itemWidth : smItemWidth; }
+
+    function getItemWidth() {
+      return window.innerWidth < 640 ? itemWidth : smItemWidth;
+    }
+
     function scrollGallery3D() {
       offset += 1;
       gallery.style.transform = `translateX(${-offset}px)`;
       gallery.style.transition = 'transform 0.05s linear';
-      if(offset >= items.length * getItemWidth()) offset = 0;
+      if (offset >= items.length * getItemWidth()) offset = 0;
     }
-    setInterval(scrollGallery3D, 20);
-    window.addEventListener('resize', () => { offset = 0; });
 
+    let scrollInterval = setInterval(scrollGallery3D, 20);
+
+    // Pause scrolling on hover
+    gallery.addEventListener("mouseover", () => {
+      clearInterval(scrollInterval);
+    });
+
+    gallery.addEventListener("mouseout", () => {
+      scrollInterval = setInterval(scrollGallery3D, 20);
+    });
+
+    // Reset offset on window resize
+    window.addEventListener('resize', () => {
+      offset = 0;
+    });
   </script>
+
 
 </body>
 </html>
+
 
 
 
